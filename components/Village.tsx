@@ -5,18 +5,21 @@ import { InfoPanel } from "./InfoPanel";
 
 import styles from "./Map.module.css";
 
-type VillageProps = {
+export type VillageProps = {
   top: number;
   left: number;
   name: string;
+  villagers?: number;
+  scholars?: number;
+  idols?: number;
 };
 
 const VILLAGER_GROWTH = 10;
 
-const Village = ({ top, left, name }: VillageProps) => {
-  const [villagers, setVillagers] = useState<number>(0);
-  const [scholars, setScholars] = useState<number>(0);
-  const [idols, setIdols] = useState<number>(0);
+const Village = (props: VillageProps) => {
+  const [villagers, setVillagers] = useState<number>(props.villagers || 0);
+  const [scholars, setScholars] = useState<number>(props.scholars || 0);
+  const [idols, setIdols] = useState<number>(props.idols || 0);
   const [{ turn }] = useTurnContext();
   const prevTurnRef = useRef<number>(1);
   useEffect(() => {
@@ -27,33 +30,24 @@ const Village = ({ top, left, name }: VillageProps) => {
   const infoPanel = useMemo(
     () => (
       <InfoPanel
-        name={name}
+        name={props.name}
         villagers={villagers}
         scholars={scholars}
         idols={idols}
       />
     ),
-    [name, villagers, scholars, idols]
-  );
-  const onClick = useCallback(
-    (e: any) => {
-      e.stopPropagation();
-      setVillagers(villagers + 1);
-      setScholars(scholars + 1);
-      setIdols(idols + 1);
-    },
-    [infoPanel]
+    [props.name, villagers, scholars, idols]
   );
 
   return (
     <div
       className={styles.villageContainer}
       style={{
-        top,
-        left,
+        top: props.top,
+        left: props.left,
       }}
     >
-      <div className={styles.village} onClick={onClick}></div>
+      <div className={styles.village}></div>
       {infoPanel}
     </div>
   );

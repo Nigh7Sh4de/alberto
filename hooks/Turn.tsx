@@ -9,7 +9,7 @@ export class TurnController {
 export type TurnContextValue = {
   turn: number;
 };
-const defaultTurnValue = 1;
+const defaultTurnValue = 0;
 
 export const TurnContext = createContext<
   [TurnContextValue, typeof TurnController]

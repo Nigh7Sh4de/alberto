@@ -6,11 +6,11 @@ const Map = () => {
   const [{ villages }, VillagesController] = useVillagesContext();
 
   const onClick = (e: any) => {
-    console.log("Map.onClick", e);
-    VillagesController.settleVillage(
-      e.nativeEvent.offsetX,
-      e.nativeEvent.offsetY
-    );
+    if (e.target !== e.currentTarget) return;
+    VillagesController.settleVillage({
+      left: e.nativeEvent.offsetX,
+      top: e.nativeEvent.offsetY,
+    });
   };
 
   return (
