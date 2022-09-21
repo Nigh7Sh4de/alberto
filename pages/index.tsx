@@ -3,7 +3,18 @@ import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
-import Map from "../components/map/Map";
+import Map from "../components/Map";
+import { VillagesContextProvider } from "../hooks/Villages";
+import { TurnContextProvider } from "../hooks/Turn";
+import { Next } from "../components/Next";
+
+const Controllers = ({ children }: any) => {
+  return (
+    <TurnContextProvider>
+      <VillagesContextProvider>{children}</VillagesContextProvider>
+    </TurnContextProvider>
+  );
+};
 
 const Home: NextPage = () => {
   return (
@@ -14,7 +25,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Map />
+      <Controllers>
+        <Map />
+        <Next />
+      </Controllers>
     </div>
   );
 };

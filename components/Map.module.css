@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.villageContainer {
+  position: absolute;
+}
+
 .village {
   margin-left: -0.5rem;
   margin-top: -0.5rem;
@@ -17,5 +21,11 @@
   border-radius: 1rem;
   border: 1px solid grey;
   box-sizing: content-box;
+}
+
+.nextButton {
+  background-color: #ff88ff;
+  height: 2rem;
+  bottom: -2rem;
   position: absolute;
 }
