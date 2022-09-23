@@ -1,9 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export class TurnController {
   static turn: number;
 
   static nextTurn: () => void;
+  static skipTenTurns: () => void;
 }
 
 export type TurnContextValue = {

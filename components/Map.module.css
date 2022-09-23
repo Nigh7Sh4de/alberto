@@ -23,9 +23,12 @@
   box-sizing: content-box;
 }
 
-.nextButton {
-  background-color: #ff88ff;
+.nextButtonContainer {
   height: 2rem;
   bottom: -2rem;
   position: absolute;
+}
+
+.nextButton {
+  background-color: #ff88ff;
 }

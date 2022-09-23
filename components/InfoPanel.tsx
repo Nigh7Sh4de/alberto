@@ -1,11 +1,16 @@
 import useVillagesContext from "../hooks/Villages";
 import styles from "./Map.module.css";
 
+const IDOL_COST = 50;
+
 export type InfoPanelProps = {
   name: string;
   villagers: number;
-  scholars: number;
   idols: number;
+  villagerPool?: number;
+  buildIdols: () => void;
+  cancelBuildIdols: () => void;
+  buildingIdol: boolean;
 };
 
 export const InfoPanel = (props: InfoPanelProps) => {
@@ -13,8 +18,16 @@ export const InfoPanel = (props: InfoPanelProps) => {
     <>
       <div>{props.name}</div>
       <div>Villagers: {props.villagers}</div>
-      <div>Scholars: {props.scholars}</div>
-      <div>Idols: {props.idols}</div>
+      <div>
+        <span>Idols: {props.idols}</span>
+        <button
+          onClick={
+            props.buildingIdol ? props.cancelBuildIdols : props.buildIdols
+          }
+        >
+          {props.buildingIdol ? `${props.villagerPool}/${IDOL_COST}` : "+"}
+        </button>
+      </div>
     </>
   );
 };
