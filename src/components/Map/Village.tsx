@@ -1,7 +1,7 @@
 import { useMemo, useCallback, useState, useEffect, useRef } from "react";
-import { useTurnContext } from "../hooks/Turn";
+import { useTurnContext } from "../../hooks/Turn";
 
-import { InfoPanel } from "./InfoPanel";
+import { InfoPanel } from "./InfoPanel
 
 import styles from "./Map.module.css";
 

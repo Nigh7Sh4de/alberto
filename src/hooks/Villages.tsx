@@ -7,7 +7,7 @@ import {
   useRef,
   useEffect,
 } from "react";
-import Village from "../components/Village";
+import Village from "../src/components/Map/Village";
 import { useTurnContext } from "./Turn";
 
 type Village = JSX.Element;

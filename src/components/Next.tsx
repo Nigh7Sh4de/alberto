@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { useTurnContext } from "../hooks/Turn";
+import React, { useEffect, useState } from "react";
+import {} from "src/";
+import { useTurnContext } from "../../hooks/Turn";
 
 import styles from "./Map.module.css";
 

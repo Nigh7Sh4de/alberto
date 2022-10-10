@@ -1,4 +1,4 @@
-import useVillagesContext from "../hooks/Villages";
+import useVillagesContext from "../../../hooks/Villages";
 import styles from "./Map.module.css";
 
 const IDOL_COST = 50;

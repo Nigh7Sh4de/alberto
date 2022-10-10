@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useVillagesContext from "../hooks/Villages";
+import useVillagesContext from "../../../hooks/Villages";
 import styles from "./Map.module.css";
 
 const Map = () => {

@@ -3,10 +3,10 @@ import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 
-import Map from "../components/Map";
+import Map from "../src/components/Map/Map";
 import { VillagesContextProvider } from "../hooks/Villages";
 import { TurnContextProvider } from "../hooks/Turn";
-import { Next } from "../components/Next";
+import { Next } from "../src/components/Next";
 
 const Controllers = ({ children }: any) => {
   return (
@@ -26,8 +26,10 @@ const Home: NextPage = () => {
       </Head>
 
       <Controllers>
-        <Map />
-        <Next />
+        <SpaceNext>
+          <Map />
+          <Next />
+        </SpaceNext>
       </Controllers>
     </div>
   );
