@@ -1,9 +1,7 @@
-import { useMemo, useCallback, useState, useEffect, useRef } from "react";
-import { useTurnContext } from "../../hooks/Turn";
-
-import { InfoPanel } from "./InfoPanel
-
-import styles from "./Map.module.css";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { InfoPanel } from 'src/components/Map/InfoPanel';
+import styles from 'src/components/Map/Map.module.css';
+import { useTurnContext } from 'src/hooks/Turn';
 
 export type VillageProps = {
   top: number;
@@ -51,16 +49,17 @@ const Village = (props: VillageProps) => {
     if (_idols !== idols) setIdols(_idols);
 
     prevTurnRef.current = turn;
-  }, [turn]);
+  }, [turn, buildingIdol, idols, villagerPool, villagers]);
 
-  const buildIdols = () => {
+  const buildIdols = useCallback(() => {
     setBuildingIdol(true);
-  };
-  const cancelBuildIdols = () => {
+  }, [setBuildingIdol]);
+
+  const cancelBuildIdols = useCallback(() => {
     setVillagerPool(0);
     setVillagers(villagers + villagerPool);
     setBuildingIdol(false);
-  };
+  }, [setVillagerPool, setVillagers, setBuildingIdol, villagers, villagerPool]);
 
   const infoPanel = useMemo(
     () => (
@@ -74,7 +73,15 @@ const Village = (props: VillageProps) => {
         buildingIdol={buildingIdol}
       />
     ),
-    [props.name, villagers, idols, buildingIdol, villagerPool]
+    [
+      props.name,
+      villagers,
+      idols,
+      buildingIdol,
+      villagerPool,
+      cancelBuildIdols,
+      buildIdols,
+    ],
   );
 
   return (

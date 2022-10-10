@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {} from "src/";
-import { useTurnContext } from "../../hooks/Turn";
-
-import styles from "./Map.module.css";
+import React, { useEffect, useState } from 'react';
+import styles from 'src/components/Map/Map.module.css';
+import { useTurnContext } from 'src/hooks/Turn';
 
 export const Next = () => {
   const [{ turn }, TurnController] = useTurnContext();
@@ -15,7 +13,7 @@ export const Next = () => {
 
   useEffect(() => {
     if (turn < targetTurn) TurnController.nextTurn();
-  }, [turn]);
+  }, [turn, TurnController, targetTurn]);
 
   return (
     <div className={styles.nextButtonContainer}>

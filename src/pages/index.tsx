@@ -1,12 +1,11 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-
-import styles from "../styles/Home.module.css";
-
-import Map from "../src/components/Map/Map";
-import { VillagesContextProvider } from "../hooks/Villages";
-import { TurnContextProvider } from "../hooks/Turn";
-import { Next } from "../src/components/Next";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Map from 'src/components/Map/Map';
+import { Next } from 'src/components/Next';
+import NextSpace from 'src/components/NextSpace';
+import { TurnContextProvider } from 'src/hooks/Turn';
+import { VillagesContextProvider } from 'src/hooks/Villages';
+import styles from 'src/styles/Home.module.css';
 
 const Controllers = ({ children }: any) => {
   return (
@@ -26,10 +25,10 @@ const Home: NextPage = () => {
       </Head>
 
       <Controllers>
-        <SpaceNext>
+        <NextSpace>
           <Map />
           <Next />
-        </SpaceNext>
+        </NextSpace>
       </Controllers>
     </div>
   );

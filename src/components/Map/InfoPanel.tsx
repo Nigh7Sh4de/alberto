@@ -1,5 +1,5 @@
-import useVillagesContext from "../../../hooks/Villages";
-import styles from "./Map.module.css";
+import styles from "src/components/Map/Map.module.css";
+import useVillagesContext from "src/hooks/Villages";
 
 const IDOL_COST = 50;
 

@@ -1,6 +1,5 @@
-import { useState } from "react";
-
 import styles from "./Map.module.css";
+import { useState } from "react";
 
 type VillageProps = {
   col: number;

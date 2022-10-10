@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import useVillagesContext from "../../../hooks/Villages";
-import styles from "./Map.module.css";
+import React from 'react';
+import useVillagesContext from 'src/hooks/Villages';
+
+import styles from './Map.module.css';
 
 const Map = () => {
   const [{ villages }, VillagesController] = useVillagesContext();
