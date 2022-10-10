@@ -17,7 +17,7 @@ const Controllers = ({ children }: any) => {
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Alberto.next</title>
         <meta name="description" content="Turn based strategy game" />
@@ -26,11 +26,13 @@ const Home: NextPage = () => {
 
       <Controllers>
         <NextSpace>
-          <Map />
-          <Next />
+          <div className={styles.container}>
+            <Map />
+            <Next />
+          </div>
         </NextSpace>
       </Controllers>
-    </div>
+    </>
   );
 };
 

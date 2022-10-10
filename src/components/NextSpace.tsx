@@ -1,19 +1,21 @@
 import React from 'react';
 import { useTurnContext } from 'src/hooks/Turn';
 
-const NextSpace = ({ children }: { children: React.ReactElement[] }) => {
+const NextSpace = ({ children }: { children: any }) => {
   const [, { nextTurn }] = useTurnContext();
 
-  console.log('DP', 'nextTurnKeyHandler', 'render');
   const nextTurnKeyHandler = (event: React.KeyboardEvent) => {
     console.log('DP', 'nextTurnKeyHandler', { event });
-    debugger;
     if (event.code === 'Space') {
-      nextTurn(1);
+      nextTurn();
     }
   };
 
-  return <div tabIndex={0} onKeyDown={nextTurnKeyHandler}></div>;
+  return (
+    <div tabIndex={0} onKeyDown={nextTurnKeyHandler}>
+      {children}
+    </div>
+  );
 };
 
 export default NextSpace;
