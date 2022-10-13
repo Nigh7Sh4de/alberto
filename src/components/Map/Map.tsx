@@ -16,7 +16,7 @@ const Map = () => {
 
   return (
     <div onClick={onClick} className={styles.container}>
-      {villages}
+      {villages.map((village) => village.reactComponent)}
     </div>
   );
 };

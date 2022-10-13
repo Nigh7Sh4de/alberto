@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { InfoPanel } from 'src/components/Map/InfoPanel';
 import styles from 'src/components/Map/Map.module.css';
 import { useTurnContext } from 'src/hooks/Turn';
+import { VillagesController } from 'src/hooks/Villages';
 
 export type VillageProps = {
   top: number;

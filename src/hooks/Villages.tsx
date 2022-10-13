@@ -1,8 +1,27 @@
-import { useTurnContext } from "./Turn";
-import { createContext, useContext, useState, useRef, useEffect } from "react";
-import Village from "src/components/Map/Village";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import VillageComponent, { VillageProps } from 'src/components/Map/Village';
+import { useTurnContext } from 'src/hooks/Turn';
 
-type Village = JSX.Element;
+const Village = (props: SettleVillageOptions) => {
+  const name = useMemo(
+    () =>
+      props.name ||
+      VillagesController.generateVillageKey(props.left, props.top),
+    [props.name, props.left, props.top],
+  );
+
+  const reactComponent = useMemo(
+    () => <VillageComponent key={props.name} name={name} {...props} />,
+    [, name, props],
+  );
+};
 
 interface SettleVillageOptions {
   top: number;
@@ -22,13 +41,9 @@ export class VillagesController {
   }
 
   static settleVillage(villageProps: SettleVillageOptions): void {
-    const name =
-      villageProps.name ||
-      this.generateVillageKey(villageProps.left, villageProps.top);
-    const newVillage = <Village key={name} name={name} {...villageProps} />;
     VillagesController.setVillages([
       ...VillagesController.villages,
-      newVillage,
+      new Village(villageProps),
     ]);
   }
 
