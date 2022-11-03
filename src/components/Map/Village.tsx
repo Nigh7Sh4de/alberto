@@ -12,7 +12,7 @@ export type VillageProps = {
   idols?: number;
 };
 
-const VILLAGER_GROWTH = 10;
+const VILLAGER_GROWTH_PER_TURN = 10;
 const IDOL_COST = 50;
 const IDOL_COST_PER_TURN = 5;
 
@@ -25,16 +25,17 @@ const Village = (props: VillageProps) => {
   const [{ turn }] = useTurnContext();
   const prevTurnRef = useRef<number>(turn);
   useEffect(() => {
+    const dt = turn - prevTurnRef.current;
     let _villagers = villagers;
     let _villagerPool = villagerPool;
     let _buildingIdol = buildingIdol;
     let _idols = idols;
 
-    _villagers = _villagers + (turn - prevTurnRef.current) * VILLAGER_GROWTH;
+    _villagers = _villagers + dt * VILLAGER_GROWTH_PER_TURN;
 
     if (_buildingIdol) {
-      _villagers -= IDOL_COST_PER_TURN;
-      _villagerPool += IDOL_COST_PER_TURN;
+      _villagers -= dt * IDOL_COST_PER_TURN;
+      _villagerPool += dt * IDOL_COST_PER_TURN;
 
       if (_villagerPool >= IDOL_COST) {
         _buildingIdol = false;
