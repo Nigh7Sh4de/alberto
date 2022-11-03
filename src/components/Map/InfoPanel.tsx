@@ -1,5 +1,6 @@
-import styles from "src/components/Map/Map.module.css";
-import useVillagesContext from "src/hooks/Villages";
+import { useMemo } from 'react';
+import styles from 'src/components/Map/Map.module.css';
+import useVillagesContext from 'src/hooks/Villages';
 
 const IDOL_COST = 50;
 
@@ -11,9 +12,29 @@ export type InfoPanelProps = {
   buildIdols: () => void;
   cancelBuildIdols: () => void;
   buildingIdol: boolean;
+  expand: () => void;
 };
 
 export const InfoPanel = (props: InfoPanelProps) => {
+  const {
+    name,
+    villagers,
+    idols,
+    villagerPool,
+    buildIdols,
+    cancelBuildIdols,
+    buildingIdol,
+    expand,
+  } = props;
+
+  const expandButton = useMemo(
+    () => (
+      <div>
+        <button onClick={expand}>Expand</button>
+      </div>
+    ),
+    [expand],
+  );
   return (
     <>
       <div>{props.name}</div>
@@ -25,9 +46,10 @@ export const InfoPanel = (props: InfoPanelProps) => {
             props.buildingIdol ? props.cancelBuildIdols : props.buildIdols
           }
         >
-          {props.buildingIdol ? `${props.villagerPool}/${IDOL_COST}` : "+"}
+          {props.buildingIdol ? `${props.villagerPool}/${IDOL_COST}` : '+'}
         </button>
       </div>
+      {villagers > 100 && idols > 0 ? expandButton : null}
     </>
   );
 };

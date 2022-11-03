@@ -1,41 +1,60 @@
-import { useTurnContext } from "./Turn";
-import { createContext, useContext, useState, useRef, useEffect } from "react";
-import Village from "src/components/Map/Village";
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import Village from 'src/components/Map/Village';
+
+import { useTurnContext } from './Turn';
 
 type Village = JSX.Element;
+
+interface Settler {
+  idols: number;
+  villagers: number;
+}
 
 interface SettleVillageOptions {
   top: number;
   left: number;
   name?: string;
-  villagers?: number;
-  scholars?: number;
-  idols?: number;
 }
 
 export class VillagesController {
   static villages: Village[];
   static setVillages: any;
+  static settler?: Settler;
 
   static generateVillageKey(x: number, y: number): string {
     return `village(${x},${y})`;
   }
 
   static settleVillage(villageProps: SettleVillageOptions): void {
+    if (!VillagesController.settler) return;
+
     const name =
       villageProps.name ||
       this.generateVillageKey(villageProps.left, villageProps.top);
-    const newVillage = <Village key={name} name={name} {...villageProps} />;
+    const newVillage = (
+      <Village
+        key={name}
+        name={name}
+        {...villageProps}
+        {...VillagesController.settler}
+      />
+    );
     VillagesController.setVillages([
       ...VillagesController.villages,
       newVillage,
     ]);
+    delete VillagesController.settler;
   }
 
   static beginGame(): void {
     const left = Math.floor(Math.random() * 500);
     const top = Math.floor(Math.random() * 500);
-    VillagesController.settleVillage({ left, top, villagers: 50, idols: 1 });
+    VillagesController.createSettler({ villagers: 50, idols: 1 });
+    VillagesController.settleVillage({ left, top });
+  }
+
+  static createSettler(settler: Settler) {
+    VillagesController.settler = settler;
   }
 }
 

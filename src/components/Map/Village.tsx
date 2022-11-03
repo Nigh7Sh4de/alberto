@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { InfoPanel } from 'src/components/Map/InfoPanel';
 import styles from 'src/components/Map/Map.module.css';
 import { useTurnContext } from 'src/hooks/Turn';
+import useVillagesContext from 'src/hooks/Villages';
 
 export type VillageProps = {
   top: number;
@@ -17,6 +18,7 @@ const IDOL_COST = 50;
 const IDOL_COST_PER_TURN = 5;
 
 const Village = (props: VillageProps) => {
+  const [_, { createSettler }] = useVillagesContext();
   const [villagers, setVillagers] = useState<number>(props.villagers || 0);
   const [idols, setIdols] = useState<number>(props.idols || 0);
   const [buildingIdol, setBuildingIdol] = useState<boolean>(false);
@@ -52,6 +54,19 @@ const Village = (props: VillageProps) => {
     prevTurnRef.current = turn;
   }, [turn, buildingIdol, idols, villagerPool, villagers]);
 
+  const expand = useCallback(() => {
+    const _villagers = Math.floor(villagers / 2);
+    const _idols = idols - 1;
+    const _expandingVillagers = villagers - _villagers;
+
+    setVillagers(_villagers);
+    setIdols(_idols);
+    createSettler({
+      villagers: _expandingVillagers,
+      idols: 1,
+    });
+  }, [createSettler, idols, villagers]);
+
   const buildIdols = useCallback(() => {
     setBuildingIdol(true);
   }, [setBuildingIdol]);
@@ -72,6 +87,7 @@ const Village = (props: VillageProps) => {
         cancelBuildIdols={cancelBuildIdols}
         villagerPool={villagerPool}
         buildingIdol={buildingIdol}
+        expand={expand}
       />
     ),
     [
@@ -82,6 +98,7 @@ const Village = (props: VillageProps) => {
       villagerPool,
       cancelBuildIdols,
       buildIdols,
+      expand,
     ],
   );
 
