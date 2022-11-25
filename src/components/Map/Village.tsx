@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { InfoPanel } from 'src/components/Map/InfoPanel';
 import styles from 'src/components/Map/Map.module.css';
 import { useTurnContext } from 'src/hooks/Turn';
 import useVillagesContext from 'src/hooks/Villages';
@@ -64,6 +63,8 @@ const Village = (props: VillageProps) => {
     createSettler({
       villagers: _expandingVillagers,
       idols: 1,
+      top: props.top,
+      left: props.left,
     });
   }, [createSettler, idols, villagers]);
 
@@ -117,3 +118,43 @@ const Village = (props: VillageProps) => {
 };
 
 export default Village;
+
+const InfoPanel = ({
+  name,
+  villagers,
+  idols,
+  villagerPool,
+  buildIdols,
+  cancelBuildIdols,
+  buildingIdol,
+  expand,
+}: {
+  name: string;
+  villagers: number;
+  idols: number;
+  villagerPool?: number;
+  buildIdols: () => void;
+  cancelBuildIdols: () => void;
+  buildingIdol: boolean;
+  expand: () => void;
+}) => {
+  const expandButton = useMemo(
+    () => <button onClick={expand}>Expand</button>,
+    [expand],
+  );
+  const readyToExpand = villagers > 100 && idols > 0;
+
+  return (
+    <>
+      <div>{name}</div>
+      <div>Villagers: {villagers}</div>
+      <div>
+        <span>Idols: {idols}</span>
+        <button onClick={buildingIdol ? cancelBuildIdols : buildIdols}>
+          {buildingIdol ? `${villagerPool}/${IDOL_COST}` : '+'}
+        </button>
+      </div>
+      {readyToExpand ? expandButton : null}
+    </>
+  );
+};
