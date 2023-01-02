@@ -1,0 +1,1 @@
+- Villager growth can be boosted by some reasource

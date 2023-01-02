@@ -1,0 +1,3 @@
+- Obstacle that all players must overcome
+- Passive spread (to force players to colony sim)
+- Active spread (deliberate attack against another player)
