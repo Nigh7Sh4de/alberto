@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VillageInfo : MonoBehaviour
+public class VillageInfoStat : MonoBehaviour
 {
     public VillageStats villageStats;
     private VillageStats oldVillageStats;
@@ -18,7 +18,7 @@ public class VillageInfo : MonoBehaviour
     {
         if (villageStats != oldVillageStats)
         {
-            foreach (PlayerStats player in PlayerInfo.players) {
+            foreach (int i = 0; i < playerI) {
                 VillagePlayerStats playerInfo = villageStats.players[player.villageStatsIndex];
                 villagersText.text = "Villagers: " + playerInfo.mainPool.villagers;
                 idolsText.text = "Idols: " + playerInfo.mainPool.idols;
